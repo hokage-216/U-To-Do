@@ -1,0 +1,48 @@
+{
+  "name": "u-to-do",
+  "version": "1.0.0",
+  "description": "A MERN Stack to-do list application.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \\\"Error: no test specified\\\" && exit 1",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hokage-216/U-To-Do.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hokage-216/U-To-Do/issues"
+  },
+  "homepage": "https://github.com/hokage-216/U-To-Do#readme",
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "apollo-server-express": "^3.13.0",
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "bootstrap": "^5.3.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "graphql": "^16.8.1",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "vite": "^4.4.5"
+  }
+}
