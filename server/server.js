@@ -2,26 +2,77 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const db = require('./config/connection');
-
+const userModel = require('./models/user');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const secretKey = 'yourSecretKey'; // Replace with a secure secret key
 
 app.use(bodyParser.json());
 app.use(cors());
-
-
 
 app.get('/', (req, res) => {
   res.send('Home');
 });
 
-db.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
-    console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
-  });
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+  userModel.findOne({ email: email })
+    .then(user => {
+      if (user) {
+        bcrypt.compare(password, user.password)
+          .then(match => {
+            if (match) {
+              // Generate JWT token
+              const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+              res.json({ token: token });
+            } else {
+              res.status(401).json({ error: "Incorrect password" });
+            }
+          })
+          .catch(err => res.status(500).json({ error: err.message }));
+      } else {
+        res.status(404).json({ error: "User not found" });
+      }
+    })
+    .catch(err => res.status(500).json({ error: err.message }));
 });
+
+app.post('/register', (req, res) => {
+  const { username, email, password } = req.body;
+  userModel.findOne({ email: email })
+    .then(existingUser => {
+      if (existingUser) {
+        // User already exists, send a message
+        res.status(400).json({ message: "User already exists" });
+      } else {
+        // User doesn't exist, proceed with registration
+        bcrypt.hash(password, 10)
+          .then(hashedPassword => {
+            return userModel.create({ username, email, password: hashedPassword });
+          })
+          .then(user => {
+            // Send a success response with the created user object
+            res.status(201).json(user);
+          })
+          .catch(err => {
+            // Send an error response with the error object
+            res.status(500).json(err);
+          });
+      }
+    })
+    .catch(err => res.status(500).json({ error: err.message }));
+});
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/u-to-do', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('MongoDB connected');
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+    });
+  })
+  .catch(err => console.error(err));

@@ -1,7 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios.post('http://localhost:5000/login', { email, password })
+      .then(response => {
+        const token = response.data.token;
+        // Store token securely (e.g., local storage)
+        localStorage.setItem('token', token);
+        navigate('/'); // Redirect to home page or dashboard
+      })
+      .catch(err => console.log(err));
+  };
   return (
     <div className="login-background">
       <div className="container mt-5">
@@ -10,14 +26,14 @@ const Login = () => {
             <div className="card">
               <div className="card-body">
                 <h2 className="card-title text-center">Login</h2>
-                <form id="login-form" action="your_login_script.php" method="post">
+                <form id="login-form" action="your_login_script.php" method="post" onSubmit={handleSubmit}>
                   <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email:</label>
-                    <input type="email" className="form-control" id="email" name="email" required/>
+                    <input type="email" className="form-control" id="email" name="email" required onChange={(e) => setEmail(e.target.value)} value={email}/>
                   </div>
                   <div className="mb-3">
                     <label htmlFor="password" className="form-label">Password:</label>
-                    <input type="password" className="form-control" id="password" name="password" required/> 
+                    <input type="password" className="form-control" id="password" name="password" required onChange={(e) => setPassword(e.target.value)} value={password}/> 
                   </div>
                   <div className="d-grid">
                     <button type="submit" className="btn btn-primary">Login</button>

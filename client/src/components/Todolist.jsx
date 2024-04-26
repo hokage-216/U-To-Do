@@ -8,7 +8,7 @@ const Todo = () => {
             <div className="card">
               <div className="card-body">
                 <h1 className="card-title text-center">To-Do</h1>
-                <input type="todo" classname="todo-box" id="todo" />
+                <input type="todo" className="todo-box" id="todo" />
               </div>
             </div>
           </div>
@@ -17,3 +17,5 @@ const Todo = () => {
 
     )
 }
+
+export default Todo;
