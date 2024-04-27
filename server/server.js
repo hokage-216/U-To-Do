@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const userModel = require('./models/user');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const { signToken } = require('./utils/auth');
 
 require('dotenv').config();
 
@@ -27,7 +28,7 @@ app.post('/login', (req, res) => {
         bcrypt.compare(password, user.password)
           .then(match => {
             if (match) {
-              const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+              const token = signToken({ email: user.email, name: user.name, _id: user._id });
               res.json({ token: token });
             } else {
               res.status(401).json({ error: "Incorrect password" });

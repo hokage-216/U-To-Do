@@ -11,12 +11,15 @@ const Login = () => {
     e.preventDefault();
     axios.post('http://localhost:5000/login', { email, password })
       .then(response => {
-        const token = response.data.token;
-        // Store token securely (e.g., local storage)
-        localStorage.setItem('token', token);
-        navigate('/'); // Redirect to home page or dashboard
+        if (response.data && response.data.token) {
+          const token = response.data.token;
+          localStorage.setItem('token', token);
+          navigate('/'); 
+        } else {
+          console.error('Token not found in response');
+        }
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
   };
   return (
     <div className="login-background">
