@@ -10,7 +10,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const secretKey = 'yourSecretKey'; // Replace with a secure secret key
+const secretKey = 'SECRET'; 
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -27,7 +27,6 @@ app.post('/login', (req, res) => {
         bcrypt.compare(password, user.password)
           .then(match => {
             if (match) {
-              // Generate JWT token
               const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
               res.json({ token: token });
             } else {
