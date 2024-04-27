@@ -22,6 +22,7 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   userModel.findOne({ email: email })
     .then(user => {
       if (user) {
@@ -36,7 +37,7 @@ app.post('/login', (req, res) => {
           })
           .catch(err => res.status(500).json({ error: err.message }));
       } else {
-        res.status(404).json({ error: "User not found" });
+        res.status(401).json({ error: "Invalid credential" });
       }
     })
     .catch(err => res.status(500).json({ error: err.message }));
@@ -44,17 +45,7 @@ app.post('/login', (req, res) => {
 
 app.post('/register', (req, res) => {
   const { username, email, password } = req.body;
-  userModel.findOne({ email: email })
-    .then(existingUser => {
-      if (existingUser) {
-        // User already exists, send a message
-        res.status(400).json({ message: "User already exists" });
-      } else {
-        // User doesn't exist, proceed with registration
-        bcrypt.hash(password, 10)
-          .then(hashedPassword => {
-            return userModel.create({ username, email, password: hashedPassword });
-          })
+  userModel.create({ username, email, password })
           .then(user => {
             // Send a success response with the created user object
             res.status(201).json(user);
@@ -63,9 +54,6 @@ app.post('/register', (req, res) => {
             // Send an error response with the error object
             res.status(500).json(err);
           });
-      }
-    })
-    .catch(err => res.status(500).json({ error: err.message }));
 });
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/u-to-do', { useNewUrlParser: true, useUnifiedTopology: true })

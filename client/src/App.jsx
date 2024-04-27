@@ -6,12 +6,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
-
+  const token = localStorage.getItem('token')
+  const isLogggedIn = token != null
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={isLoggedIn ? <Todo /> : <Navigate to="/login" />} />
+      <Route path="/" element={isLogggedIn ? <Todo /> : <Navigate to="/login" />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Login />} />
       </Routes>
