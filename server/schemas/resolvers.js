@@ -1,8 +1,20 @@
-const { User, Todo } = require('../models');
+const { User, Todo, Profile } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    profiles: async () => {
+      return Profile.find();
+    },
+    profile: async (parent, { profileId }) => {
+      return Profile.findOne({ _id: profileId });
+    },
+    // me: async (parent, args, context) => {
+    //   if (context.user) {
+    //     return Profile.findOne({ _id: context.user._id });
+    //   }
+    //   throw AuthenticationError;
+    // },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('todos');
     },
@@ -12,30 +24,53 @@ const resolvers = {
       return Todo.find({ user: user.id });
     }
   },
-
   Mutation: {
-    addUser: async (parent, { username, email, password }) => {
-      const user = await User.create({ username, email, password });
-      const token = signToken(user);
-      return { token, user };
+    addProfile: async (parent, { name, email, password }) => {
+      const profile = await Profile.create({ name, email, password });
+      const token = signToken(profile);
+      return { token, profile };
     },
     login: async (parent, { email, password }) => {
-      const user = await User.findOne({ email });
+      const profile = await Profile.findOne({ email });
 
-      if (!user) {
-        throw AuthenticationError
+      if (!profile) {
+        throw AuthenticationError;
       }
 
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await profile.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw AuthenticationError
+        throw AuthenticationError;
       }
 
-      const token = signToken(user);
-
-      return { token, user };
+      const token = signToken(profile);
+      return { token, profile };
     },
+    // Add a third argument to the resolver to access data in our `context`
+    addTodo: async (parent, { todo }, context) => {
+      if (context.user) {
+        const profileId = context.user._id;
+        // Assuming Todo model exists and is imported
+        const newTodo = await Todo.create({ todo, createdBy: profileId });
+        return newTodo;
+      }
+      throw AuthenticationError;
+    },
+    removeProfile: async (parent, args, context) => {
+      if (context.user) {
+        return Profile.findOneAndDelete({ _id: context.user._id });
+      }
+      throw AuthenticationError;
+    },
+    removeTodo: async (parent, { todoId }, context) => {
+      if (context.user) {
+        // Assuming Todo model exists and is imported
+        return Todo.findOneAndDelete({ _id: todoId, createdBy: context.user._id });
+      }
+      throw AuthenticationError;
+    },
+  },
+};
     createTodo: async (_, { content }, { user }) => {
       if (!user) throw new AuthenticationError('You must be logged in');
       const todo = new Todo({
