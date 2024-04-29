@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Brian Kernighan",
+    "email": "bkernighan@techfriends.dev",
+    "password": "password01",
+    "todos": ["Go for a jog", "Read a book", "Call a friend", "Cook a new recipe"]
+  },
+  {
+    "name": "Max Kanat-Alexander",
+    "email": "mkanatalexander@techfriends.dev",
+    "password": "password02",
+    "todos": ["Visit a museum", "Take a hike", "Watch a movie", "Try a new restaurant"]
+  },
+  {
+    "name": "Amiko",
+    "email": "amiko@techfriends.dev",
+    "password": "password03",
+    "todos": ["Paint a picture", "Visit the beach", "Attend a concert", "Explore a new city"]
+  },
+  {
+    "name": "Kent Beck",
+    "email": "kbeck@techfriends.dev",
+    "password": "password04",
+    "todos": ["Practice meditation", "Write in a journal", "Learn a new language", "Volunteer"]
+  },
+  {
+    "name": "Edward V. Berard",
+    "email": "evberard@techfriends.dev",
+    "password": "password05",
+    "todos": ["Try a new sport", "Gardening", "Take a road trip", "Visit a zoo"]
+  },
+  {
+    "name": "Alan Kay",
+    "email": "akay@techfriends.dev",
+    "password": "password06",
+    "todos": ["Stargazing", "Cook a fancy dinner", "Plan a picnic", "Go on a bike ride"]
+  },
+  {
+    "name": "C.A.R. Hoare",
+    "email": "choare@techfriends.dev",
+    "password": "password07",
+    "todos": ["Learn photography", "Attend a workshop", "Write poetry", "Explore a new hobby"]
+  },
+  {
+    "name": "David Thomas",
+    "email": "dthomas@techfriends.dev",
+    "password": "password08",
+    "todos": ["Attend a live performance", "Try yoga", "Visit an art gallery", "Take a cooking class"]
+  },
+  {
+    "name": "Donald Knuth",
+    "email": "dknuth@techfriends.dev",
+    "password": "password09",
+    "todos": ["Learn to play a musical instrument", "Go camping", "Explore a nearby park", "Have a picnic"]
+  },
+  {
+    "name": "Lernantino",
+    "email": "lernantino@techfriends.dev",
+    "password": "password10",
+    "todos": ["Try a new restaurant", "Go for a bike ride", "Visit a botanical garden", "Take a scenic drive"]
+  }
+]
