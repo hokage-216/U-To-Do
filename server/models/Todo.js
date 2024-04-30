@@ -1,14 +1,13 @@
 const { Schema, model } = require('mongoose');
-const User = require('./User');
 
 const todoSchema = new Schema({
   content: { 
     type: String, 
     required: true 
 },
-  user: { 
+  profile: { 
     type: Schema.Types.ObjectId, 
-    ref: 'User', 
+    ref: 'Profile', 
     required: true
 }
 });
