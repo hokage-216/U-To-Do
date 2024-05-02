@@ -3,15 +3,15 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    profile: async (parent, { profileId }) => {
-      return Profile.findOne({ _id: profileId }).populate('todo');
-    },
+    // profile: async (parent, { profileId } ) => {
+    //   return Profile.findOne({ _id: profileId});
+    // },
     me: async (parent, args, context) => {
-      if (context.profile) {
-        return Profile.findOne({ _id: context.profile._id });
+      if (context.user) {
+        return Profile.findOne({ _id: context.user._id }).populate('todo');
       }
       throw AuthenticationError;
-    },
+    }
   },
   Mutation: {
     addProfile: async (parent, { name, email, password }) => {
@@ -36,13 +36,21 @@ const resolvers = {
       return { token, profile };
     },
     // Add a third argument to the resolver to access data in our `context`
-    addTodo: async (parent, { todo }, context) => {
-      if (context.profile) {
-        const profileId = context.profile._id;
-        // Assuming Todo model exists and is imported
-        const newTodo = await Todo.create({ todo, createdBy: profileId });
-        return newTodo;
+    addTodo: async (parent, { profileId , todos }, context) => {
+      if (context.user) {
+
+        return Profile.findByIdAndUpdate(
+          { _id: profileId },
+          {
+            $addToSet: { todos: todos },
+          },
+          {
+            new: true,
+            runValidators: true,
+          }
+        );
       }
+
       throw AuthenticationError;
     },
     // removeProfile: async (parent, args, context) => {

@@ -1,17 +1,14 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
+
+const { Schema } = mongoose;
 
 const todoSchema = new Schema({
-  content: { 
+  todos: { 
     type: String, 
     required: true 
-},
-  profile: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'Profile', 
-    required: true
 }
 });
 
-const Todo = model('Todo', todoSchema);
+const Todo = mongoose.model('Todo', todoSchema);
 
 module.exports = Todo;

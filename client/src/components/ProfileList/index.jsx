@@ -6,18 +6,20 @@ const TodoList = ({ todos }) => {
   const [newTodo, setNewTodo] = useState('');
   const [addTodo] = useMutation(ADD_TODO);
   const [removeTodo] = useMutation(REMOVE_TODO);
+  
 
   const handleAddTodo = async () => {
+
     try {
       // Validate newTodo
       if (!newTodo.trim()) {
         console.error('Todo cannot be empty');
         return;
       }
-  
+      const profileId = '6632d80fc0204635471d8817';
       // Call the addTodo mutation
       await addTodo({
-        variables: { todo: newTodo },
+        variables: { profileId: profileId, todos: newTodo },
       });
       // Reset the input field after adding the todo
       setNewTodo('');

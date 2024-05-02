@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const Todo = require('./Todo');
 
 const profileSchema = new Schema({
   name: {
@@ -19,12 +20,7 @@ const profileSchema = new Schema({
     required: true,
     minlength: 5,
   },
-  todo: [
-    {
-      type: String,
-      trim: true,
-    },
-  ],
+  todos: [Todo.schema],
 });
 
 // set up pre-save middleware to create password
