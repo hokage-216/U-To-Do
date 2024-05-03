@@ -1,36 +1,33 @@
 const typeDefs = `
-  type User {
-    _id: ID!
-    username: String!
-    email: String!
-    password: String!
-    todos: [Todo]
+
+  type Profile {
+    _id: ID
+    name: String
+    email: String
+    password: String
+    todos: [String]
   }
 
   type Todo {
-    _id: ID!
-    content: String!
-    completed: Boolean!
-    user: User
+    _id: ID
+    todos: String
   }
 
   type Auth {
-    token: ID!
-    user: User
+    token: ID
+    profile: Profile
   }
 
   type Query {
-    users: [User]
-    todos: [Todo]
-    user(username: String!): User
+    me: Profile
   }
   
   type Mutation {
-    addUser(username: String!, email: String!, password: String!): Auth
-    createTodo(content: String!): Todo
-    updateTodo(id: ID!, content: String, completed: Boolean): Todo
-    deleteTodo(id: ID!): Todo
+    addProfile(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
+    addTodo(profileId: ID!, todos: String!): Todo
+    removeProfile: Profile
+    removeTodo(todoId: ID!): Todo
   }`;
 
-  module.exports = typeDefs;
+module.exports = typeDefs;

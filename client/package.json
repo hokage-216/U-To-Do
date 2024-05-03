@@ -1,44 +1,24 @@
 {
-  "name": "u-to-do",
-  "version": "1.0.0",
-  "description": "A MERN Stack to-do list application.",
-  "main": "server.js",
+  "name": "client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \\\"Error: no test specified\\\" && exit 1",
     "dev": "vite",
-    "start": "vite",
     "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hokage-216/U-To-Do.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/hokage-216/U-To-Do/issues"
-  },
-  "homepage": "https://github.com/hokage-216/U-To-Do#readme",
   "dependencies": {
-    "apollo-server": "^3.13.0",
-    "apollo-server-express": "^3.13.0",
-    "axios": "^1.6.8",
-    "bcrypt": "^5.1.1",
-    "bootstrap": "^5.3.3",
-    "dotenv": "^16.4.5",
-    "express": "^4.19.2",
-    "graphql": "^16.8.1",
-    "jsonwebtoken": "^9.0.2",
-    "mongodb": "^6.5.0",
-    "mongoose": "^8.3.2",
+    "@apollo/client": "^3.7.14",
+    "graphql": "^16.6.0",
+    "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.23.0",
-    "react-toastify": "^10.0.5"
+    "react-router-dom": "^6.11.2"
   },
   "devDependencies": {
-    "@types/react": "^18.0.28",
+    "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",
     "eslint": "^8.38.0",

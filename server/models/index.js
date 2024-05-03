@@ -1,4 +1,4 @@
-const User = require('./User');
+const Profile = require('./Profile');
 const Todo = require('./Todo');
 
-module.exports = {User, Todo};
+module.exports = {Todo, Profile};
