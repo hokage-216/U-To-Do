@@ -1331,6 +1331,55 @@ label form [type='radio'] {
   max-width: 100%;
 }
 
+.profile-list-title {
+  color: #007bff; /* Blue color */
+}
+
+.profile-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.profile-card {
+  width: calc(50% - 10px); /* Two cards per row with some space in between */
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ced4da; /* Light grey border */
+  border-radius: 5px;
+}
+
+.profile-card-header {
+  background-color: #343a40; /* Dark grey background */
+  color: #fff; /* White text */
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.todo-count {
+  font-size: 1rem;
+}
+
+.view-todos-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: #f8f9fa; /* Light grey background */
+  color: #343a40; /* Dark grey text */
+  text-decoration: none; /* Remove underline */
+  border: 1px solid #343a40; /* Dark grey border */
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.view-todos-link:hover {
+  background-color: #343a40; /* Dark grey background on hover */
+  color: #fff; /* White text on hover */
+}
+
+
 /* col-sm */
 @media screen and (min-width: 640px) {
   .col-sm-auto {
