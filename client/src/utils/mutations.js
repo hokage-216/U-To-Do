@@ -13,8 +13,8 @@ export const ADD_PROFILE = gql`
 `;
 
 export const ADD_TODO = gql`
-  mutation addTodo($profileId: ID!, $todos: String!) {
-    addTodo(profileId: $profileId, todos: $todos) {
+  mutation addTodo($profileId: ID!, $todo: String!) {
+    addTodo(profileId: $profileId, todo: $todo) {
       _id
       todos
     }
@@ -34,8 +34,8 @@ export const LOGIN_USER = gql`
 `;
 
 export const REMOVE_TODO = gql`
-  mutation removeTodo($todoId: ID!) {
-    removeTodo(todoId: $todoId) {
+  mutation removeTodo($todo: String!) {
+    removeTodo(todo: $todo) {
       _id
       name
       todos

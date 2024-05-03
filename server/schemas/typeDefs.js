@@ -8,26 +8,25 @@ const typeDefs = `
     todos: [String]
   }
 
-  type Todo {
-    _id: ID
-    todos: String
-  }
-
   type Auth {
     token: ID
     profile: Profile
   }
 
   type Query {
+    profiles: [Profile]!
+    profile(profileId: ID!): Profile
     me: Profile
   }
   
   type Mutation {
     addProfile(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addTodo(profileId: ID!, todos: String!): Todo
+
+    addTodo(profileId: ID!, todo: String!): Profile
     removeProfile: Profile
-    removeTodo(todoId: ID!): Todo
-  }`;
+    removeTodo(todo: String!): Profile
+  }
+`;
 
 module.exports = typeDefs;
