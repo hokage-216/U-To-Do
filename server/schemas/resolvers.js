@@ -1,17 +1,22 @@
-const { Todo, Profile } = require('../models');
+const { Profile } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
-    // profile: async (parent, { profileId } ) => {
-    //   return Profile.findOne({ _id: profileId});
-    // },
+    profiles: async () => {
+      return Profile.find();
+    },
+
+    profile: async (parent, { profileId }) => {
+      return Profile.findOne({ _id: profileId });
+    },
+    // By adding context to our query, we can retrieve the logged in user without specifically searching for them
     me: async (parent, args, context) => {
       if (context.user) {
-        return Profile.findOne({ _id: context.user._id }).populate('todo');
+        return Profile.findOne({ _id: context.user._id });
       }
       throw AuthenticationError;
-    }
+    },
   },
   Mutation: {
     addProfile: async (parent, { name, email, password }) => {
@@ -36,13 +41,12 @@ const resolvers = {
       return { token, profile };
     },
     // Add a third argument to the resolver to access data in our `context`
-    addTodo: async (parent, { profileId , todos }, context) => {
+    addTodo: async (parent, { profileId , todo }, context) => {
       if (context.user) {
-
-        return Profile.findByIdAndUpdate(
+        return Profile.findOneAndUpdate(
           { _id: profileId },
           {
-            $addToSet: { todos: todos },
+            $addToSet: { todos: todo },
           },
           {
             new: true,
@@ -50,22 +54,24 @@ const resolvers = {
           }
         );
       }
-
+      throw new AuthenticationError('Unauthorized');
+    },
+    removeProfile: async (parent, args, context) => {
+      if (context.user) {
+        return Profile.findOneAndDelete({ _id: context.user._id });
+      }
       throw AuthenticationError;
     },
-    // removeProfile: async (parent, args, context) => {
-    //   if (context.user) {
-    //     return Profile.findOneAndDelete({ _id: context.user._id });
-    //   }
-    //   throw AuthenticationError;
-    // },
-    // removeTodo: async (parent, { todoId }, context) => {
-    //   if (context.user) {
-    //     // Assuming Todo model exists and is imported
-    //     return Todo.findOneAndDelete({ _id: todoId, createdBy: context.user._id });
-    //   }
-    //   throw AuthenticationError;
-    // }
+    removeTodo: async (parent, { todo }, context) => {
+      if (context.user) {
+        // Assuming Todo model exists and is imported
+        return Profile.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { todos: todo } },
+          { new: true });
+      }
+      throw AuthenticationError;
+    },
   },
 };
 
