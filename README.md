@@ -12,7 +12,7 @@ A MERN stack web To-Do application template utilizing Vite.
 
 ## Description
 
-U-To-Do is an easy to use web app made to keep track of what you need to do using a to-do list. When opening you will be prompted to log in or create an account to save your personal U-To-Do list. After logging in or creating an account you will be brought to an easy to use page where you can simply add, edit or delete your to-dos. To make a new to-do just type in your to-do in the bar on the home page and hit enter to add it to your list. To delete a to-do just click on the to-do you want to delete. After finishing your new to-dos you are free to log out which is placed at the top of the page and will push you out to the login page.
+Welcome to our collaborative ToDo List App! This app is designed to streamline your task management process by allowing multiple users to create and share ToDo lists with each other. Say goodbye to scattered sticky notes and endless email chains, and hello to efficient and organized teamwork!
 
 ## Usage
 
@@ -56,19 +56,19 @@ npm run develop
 
 [Matthew Cook](https://github.com/mcook2323)
 
-- 
+-
 
 [LeVente Berry](https://github.com/hokage-216)
 
-- 
+-
 
 [Dom Simonetta](https://github.com/DomSimonetta)
 
-- 
+-
 
 [Ayo Okediji](https://github.com/Ayotheman12)
 
-- 
+-
 
 ## Technologies
 
