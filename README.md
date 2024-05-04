@@ -66,7 +66,7 @@ npm run develop
 
 - 
 
-[Ayo Okediji]()
+[Ayo Okediji](https://github.com/Ayotheman12)
 
 - 
 
