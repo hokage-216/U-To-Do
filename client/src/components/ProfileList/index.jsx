@@ -17,7 +17,7 @@ const ProfileList = ({ profiles, title }) => {
                 <br />
                 <span className="todo-count">
                   currently has {profile.todos ? profile.todos.length : 0}{' '}
-                  Todo items
+                  Todo item
                   {profile.todos && profile.todos.length === 1 ? '' : 's'}
                 </span>
               </div>
