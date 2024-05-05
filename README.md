@@ -34,7 +34,7 @@ A live deployment of the application can be found [here](https://u-to-do.onrende
 npm install
 ```
 
-![NPM Install Example](./assets/vite-build.jpeg)
+![NPM Install Example](./assets/npm-install.jpeg)
 
 2. Then build the front end with the following command:
 
