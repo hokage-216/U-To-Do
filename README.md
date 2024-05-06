@@ -56,19 +56,19 @@ npm run develop
 
 [Matthew Cook](https://github.com/mcook2323)
 
--
+-React, Express/Node, Mongoose/MongoDB, JWT, Vite
 
 [LeVente Berry](https://github.com/hokage-216)
 
--
+-Express/Node, Mongoose/MongoDB, Apollo Server, GraphQL
 
 [Dom Simonetta](https://github.com/DomSimonetta)
 
--
+-React, Express, Mongoose/MongoDB, Powerpoint
 
 [Ayo Okediji](https://github.com/Ayotheman12)
 
--
+-React, Express, Mongoose/MongoDB
 
 ## Technologies
 
